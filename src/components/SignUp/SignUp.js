@@ -84,6 +84,10 @@ export default function SignUp(){
             setState(false);
             return alert ("Insira o e-mail!");
         }
+        else if(password.length < 6){
+            setState(false);
+            return alert("A senha precisa ter pelo menos 6 caracteres");
+        }
 
         const data = {
             "name": `${name}`,
