@@ -23,10 +23,10 @@ export default function App(){
                     <Home />
                 </Route>
                 <Route path="/add" exact>
-                    <Action />
+                    <Action type={"add"} />
                 </Route>
                 <Route path="/remove" exact>
-                    <Action />
+                    <Action type={"remove"}/>
                 </Route>
             </Switch>
         </BrowserRouter>
