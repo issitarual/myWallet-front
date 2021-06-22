@@ -45,6 +45,6 @@ const Container = styled.div`
         font-weight: bold;
         cursor: pointer;
     }
-`
+`;
 
 export { Container };

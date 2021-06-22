@@ -1,6 +1,7 @@
-import { Container } from "../loginAndSingupStyles";
+import { Container } from "../formsStyles";
 import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import Loader from "react-loader-spinner";
 import axios from "axios";
 
 export default function SignUp(){
@@ -8,16 +9,21 @@ export default function SignUp(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [state, setState] = useState(false);
+
+    let history = useHistory();
+
     return(
         <Container>
             <h1>MyWallet</h1>
-            <form onSubmit={console.log("hey")}>
+            <form onSubmit={(e) => signUp(name, email, password, confirmPassword, e)}>
                 <input 
                     type = "text" 
                     placeholder = "Nome" 
                     value = {name} 
                     onChange = {e => setName(e.target.value)}
                     required
+                    disabled = {state}
                 />
                 <input 
                     type = "email" 
@@ -25,6 +31,7 @@ export default function SignUp(){
                     value = {email} 
                     onChange = {e => setEmail(e.target.value)}
                     required
+                    disabled = {state}
                 />
                 <input 
                     type = "password" 
@@ -32,6 +39,7 @@ export default function SignUp(){
                     value = {password} 
                     onChange = {e => setPassword(e.target.value)}
                     required
+                    disabled = {state}
                 />
                 <input 
                     type = "password" 
@@ -39,9 +47,17 @@ export default function SignUp(){
                     value = {confirmPassword} 
                     onChange = {e => setConfirmPassword(e.target.value)}
                     required
+                    disabled = {state}
                 />
-                <button type="button">
-                    Cadastrar
+                <button type="submit" disabled = {state}>
+                    {state? "": "Cadastar"}
+                    <Loader 
+                        visible ={state} 
+                        type="ThreeDots" 
+                        color="#FFF" 
+                        height={15} 
+                        width={80} 
+                    /> 
                 </button>
             </form>
             <Link to="/">
@@ -51,4 +67,37 @@ export default function SignUp(){
             </Link>
         </Container>
     );
+
+    function signUp(name, email, password, confirm, event) {
+        event.preventDefault();
+        setState(true);
+
+        if(password !== confirm){ 
+            setState(false);
+            return alert("As senhas são diferentes, tente novamente!");
+        }
+        else if(!name){ 
+            setState(false);
+            return alert ("Insira o nome!");
+        }
+        else if(!email){ 
+            setState(false);
+            return alert ("Insira o e-mail!");
+        }
+
+        const data = {
+            "name": `${name}`,
+            "email": `${email}`,
+            "password": `${password}`
+        }
+
+        const request = axios.post('http://localhost:4000/sign-up', data)
+
+        request.then(response => history.push("/"));
+        request.catch(error => {
+            alert("Ocorreu um erro, tente novamente!")
+            setState(false)
+        });
+
+    }
 };

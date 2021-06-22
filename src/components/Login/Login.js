@@ -1,4 +1,4 @@
-import { Container } from "../loginAndSingupStyles";
+import { Container } from "../formsStyles";
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
