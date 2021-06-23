@@ -2,6 +2,7 @@ import { Header } from "./HomeStyles";
 import { EnterOutline } from 'react-ionicons';
 import { useContext } from "react";
 import { useHistory } from "react-router";
+import axios from "axios";
 
 import UserContext from "../../contexts/userContext";
 
@@ -20,7 +21,17 @@ export default function HomeHeader(){
         </Header>
     );
     function logOut() {
-        localStorage.clear();
-        history.push("/");        
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${user.token}`
+            }
+        }
+        const request = axios.post("http://localhost:4000/sign-out",{}, config)
+
+        request.then( succes => {
+            localStorage.clear();
+            history.push("/");  
+        })
+        request.catch( error => alert("Ocorreu um erro, tente novamente!"));              
     }
 };

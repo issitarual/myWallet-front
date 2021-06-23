@@ -45,6 +45,14 @@ const Container = styled.div`
         font-weight: bold;
         cursor: pointer;
     }
+    p{
+        font-family: 'Raleway', sans-serif;
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        text-align: center;
+        margin-top: 20px;
+    }
 `;
 
 export { Container };
