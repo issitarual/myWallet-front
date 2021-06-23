@@ -1,15 +1,25 @@
 import { Container } from "../formsStyles";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useHistory } from 'react-router-dom';
 import Loader from "react-loader-spinner";
 import axios from "axios";
+
+import UserContext from "../../contexts/userContext";
 
 export default function Login(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [state, setState] = useState(false);
 
+    const { setUser } = useContext(UserContext);
+
     let history = useHistory();
+
+    if (localStorage.length !== 0){
+        const user = JSON.parse(localStorage.getItem("user"));
+        setUser(user);
+        history.push("/home");
+    }
 
     return(
         <Container>
@@ -69,7 +79,11 @@ export default function Login(){
 
         const request = axios.post('http://localhost:4000/sign-in', data);
 
-        request.then(sucess => history.push("/home"));
+        request.then(sucess => {
+            setUser(sucess.data);
+            localStorage.setItem('user', JSON.stringify(sucess.data));
+            history.push("/home")
+        });
         request.catch(error => {
             alert("Algo deu errado, tente novamente!")
             setState(false);
