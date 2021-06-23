@@ -99,7 +99,6 @@ export default function SignUp(){
 
         request.then(response => history.push("/"));
         request.catch(error => {
-            console.log(error)
             alert("Ocorreu um erro, tente novamente!")
             setState(false)
         });
