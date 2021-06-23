@@ -90,15 +90,16 @@ export default function SignUp(){
         }
 
         const data = {
-            "name": `${name}`,
-            "email": `${email}`,
-            "password": `${password}`
+            "name": name,
+            "email": email,
+            "password": password
         }
 
         const request = axios.post('http://localhost:4000/sign-up', data)
 
         request.then(response => history.push("/"));
         request.catch(error => {
+            console.log(error)
             alert("Ocorreu um erro, tente novamente!")
             setState(false)
         });
