@@ -25,8 +25,10 @@ const Container = styled.div`
     margin-bottom: 13px;
     border-radius: 5px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: ${props => props.state === true? "": "center"};
+    align-items: ${props => props.state === true? "": "center"};
+    padding: 23px 12px;
+    position: relative;
     p{
         font-family: 'Raleway', sans-serif;
         color: #868686;
@@ -59,4 +61,24 @@ const Footer = styled.footer`
     }
 `;
 
-export{Header, Footer, Container, HomeContainer};
+const TotalContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 24px);
+    position: absolute;
+    bottom: 23px;
+    h6{
+        font-family: 'Raleway', sans-serif;
+        color: #000;
+        font-size: 17px;
+        font-weight: bold;
+    }
+`;
+
+const Value = styled.h5`
+    font-family: 'Raleway', sans-serif;
+    color: ${props => props.type? "#03AC00": "#D95050"};
+    font-size: 17px;
+`;
+
+export{Header, Footer, Container, HomeContainer, TotalContainer, Value};
