@@ -14,9 +14,9 @@ export default function Historic() {
             }
         }
 
-        const request = axios.get("http://localhost:4000/historic", config);
+        const request = axios.get("http://localhost:4000/finances", config);
 
-        request.then(success => alert("sucesso"));
+        request.then(success => console.log(success));
         request.catch(error => alert("Algo deu errado, tente mais tarde!"));
     },[]);
     
