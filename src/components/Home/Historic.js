@@ -37,6 +37,10 @@ export default function Historic() {
             <p>
                 Não há registros de<br/>entrada ou saída
             </p>:
+            finances.financial_events.length ===0?
+            <p>
+                Não há registros de<br/>entrada ou saída
+            </p>:
             <Total value = {finances.total}/>
             }
             
