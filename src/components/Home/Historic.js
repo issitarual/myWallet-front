@@ -22,8 +22,6 @@ export default function Historic() {
         request.then(success => setFinances(success.data));
         request.catch(error => alert("Algo deu errado, tente mais tarde!"));
     },[]);
-
-    console.log(finances)
     
     return(
         <Container status={finances.length === 0? false: true}>
