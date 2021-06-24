@@ -81,4 +81,32 @@ const Value = styled.h5`
     font-size: 17px;
 `;
 
-export{Header, Footer, Container, HomeContainer, TotalContainer, Value};
+const Event = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    p{
+        font-size: 16px!important;
+    }
+`;
+
+const Created = styled.div`
+    display: flex;
+`;
+
+const Description = styled.p`
+    margin-left: 15px;
+    color: #000!important;
+`;
+
+const EventContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 23px;
+    width: calc(100% - 24px);
+    max-height: calc(100% - 80px);
+`;
+
+export{Header, Footer, Container, HomeContainer, TotalContainer, Value, Event, EventContainer, Description, Created};

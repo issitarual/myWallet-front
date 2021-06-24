@@ -1,9 +1,10 @@
-import { Container } from "./HomeStyles";
+import { Container, EventContainer } from "./HomeStyles";
 import { useEffect, useContext, useState } from "react";
 import axios from "axios";
 
 import UserContext from "../../contexts/userContext";
 import Total from "./Total";
+import Finances from "./Finances";
 
 export default function Historic() {
     const { user } = useContext(UserContext);
@@ -26,6 +27,12 @@ export default function Historic() {
     
     return(
         <Container status={finances.length === 0? false: true}>
+            <EventContainer>
+                {finances.length === 0?
+                "":
+                finances.financial_events.map(n => <Finances event = {n} />)
+                }
+            </EventContainer>
             {finances.length === 0?
             <p>
                 Não há registros de<br/>entrada ou saída
